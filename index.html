@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bottola Performance Hub - Révolutionner la Performance du Football Marocain</title>
+    <meta name="description" content="La première plateforme d'analyse intégrée pour la Botola Pro. Données tactiques, analyse vidéo et gestion de performance unifiées.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a href="index.html" class="navbar-brand-custom">
+                <div class="navbar-logo-icon"><i class="fas fa-chart-line"></i></div>
+                <div>
+                    <div class="navbar-brand-text-main">BOTTOLA</div>
+                    <div class="navbar-brand-text-sub">PERFORMANCE HUB</div>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center gap-lg-4">
+                    <li class="nav-item"><a class="nav-link-custom active" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link-custom" href="about.html">À Propos</a></li>
+                    <li class="nav-item"><a class="nav-link-custom" href="solutions.html">Solutions</a></li>
+                    <li class="nav-item"><a class="nav-link-custom" href="stats.html">Statistiques</a></li>
+                    <li class="nav-item"><a class="nav-link-custom" href="technology.html">Technologie</a></li>
+                    <li class="nav-item"><a class="nav-link-custom" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg">
+            <div class="hero-bg-overlay-1"></div>
+            <div class="hero-bg-overlay-2"></div>
+            <div class="hero-bg-noise"></div>
+        </div>
+        
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 hero-content">
+                    <div class="hero-badge">
+                        <span class="hero-badge-dot"></span>
+                        La Révolution du Football Marocain
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        <span class="text-gradient-alt">ÉLEVEZ VOTRE</span><br>
+                        <span class="text-gradient">PERFORMANCE</span>
+                    </h1>
+                    
+                    <p class="hero-description">
+                        La première plateforme d'analyse intégrée pour la Botola Pro. 
+                        Données tactiques, analyse vidéo et gestion de performance unifiées 
+                        pour propulser les talents marocains vers l'excellence.
+                    </p>
+                    
+                    <div class="d-flex flex-column flex-sm-row gap-3 mb-4">
+                        <a href="solutions.html" class="btn-primary-custom">
+                            DÉCOUVRIR LA PLATEFORME
+                            <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                        <a href="contact.html" class="btn-outline-custom">
+                            <i class="fas fa-play me-2"></i>
+                            VOIR LA DÉMO
+                        </a>
+                    </div>
+                    
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <div class="hero-stat-value" data-count="16">0</div>
+                            <div class="hero-stat-label">CLUBS BOTOLA</div>
+                        </div>
+                        <div class="hero-divider"></div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value" data-count="500">0</div>
+                            <div class="hero-stat-label">JOUEURS PRO</div>
+                        </div>
+                        <div class="hero-divider"></div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">100%</div>
+                            <div class="hero-stat-label">MAROCAIN</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 position-relative d-none d-lg-block">
+                    <div class="position-relative" style="height: 600px;">
+                        <div class="position-absolute top-50 start-50 translate-middle" 
+                             style="width: 500px; height: 500px; background: rgba(215, 40, 47, 0.1); 
+                                    border-radius: 50%; filter: blur(100px);"></div>
+                        
+                        <div class="card-custom position-absolute top-50 start-50 translate-middle p-4" 
+                             style="width: 450px; backdrop-filter: blur(20px); transform: rotate(2deg) translate(-50%, -50%) !important;">
+                            <div style="width: 100%; height: 350px; background: linear-gradient(135deg, 
+                                        var(--muted), var(--card)); 
+                                        border-radius: var(--radius); display: flex; align-items: center; 
+                                        justify-content: center;">
+                                <i class="fas fa-chart-line" style="font-size: 120px; color: var(--primary);"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="floating-card" style="top: 15%; left: -5%;">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="floating-card-icon" style="background: rgba(0, 98, 37, 0.2);">
+                                    <div class="floating-card-icon-inner" style="background: var(--secondary);"></div>
+                                </div>
+                                <div>
+                                    <div class="floating-card-label">Vitesse Max</div>
+                                    <div class="floating-card-value">34.5 km/h</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="floating-card" style="bottom: 20%; right: -5%; animation-delay: 1s;">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="floating-card-icon" style="background: rgba(215, 40, 47, 0.2);">
+                                    <div class="floating-card-icon-inner" style="background: var(--primary);"></div>
+                                </div>
+                                <div>
+                                    <div class="floating-card-label">Précision Passes</div>
+                                    <div class="floating-card-value">92%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <span style="font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;">Explorer</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Une Plateforme <span class="text-gradient">Révolutionnaire</span></h2>
+                <p>Bottola Performance Hub centralise tous les outils dont vous avez besoin pour maximiser votre potentiel</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card-custom text-center h-100">
+                        <div class="mx-auto mb-4" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background: rgba(215, 40, 47, 0.1); border-radius: var(--radius);">
+                            <i class="fas fa-chart-line" style="font-size: 32px; color: var(--primary);"></i>
+                        </div>
+                        <h3 class="card-title" style="font-size: 1.25rem;">Analyses Précises</h3>
+                        <p class="card-description">
+                            Des insights basés sur vos performances réelles pour des décisions éclairées et stratégiques
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card-custom text-center h-100">
+                        <div class="mx-auto mb-4" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background: rgba(0, 98, 37, 0.1); border-radius: var(--radius);">
+                            <i class="fas fa-video" style="font-size: 32px; color: var(--secondary);"></i>
+                        </div>
+                        <h3 class="card-title" style="font-size: 1.25rem;">Vidéos Intelligentes</h3>
+                        <p class="card-description">
+                            Analyse vidéo avancée avec annotations tactiques et comparaisons détaillées
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card-custom text-center h-100">
+                        <div class="mx-auto mb-4" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background: rgba(212, 175, 55, 0.1); border-radius: var(--radius);">
+                            <i class="fas fa-chess-knight" style="font-size: 32px; color: var(--accent);"></i>
+                        </div>
+                        <h3 class="card-title" style="font-size: 1.25rem;">Tactiques Personnalisées</h3>
+                        <p class="card-description">
+                            Recommandations tactiques intelligentes adaptées à votre position et style de jeu
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card-custom text-center h-100">
+                        <div class="mx-auto mb-4" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background: rgba(215, 40, 47, 0.1); border-radius: var(--radius);">
+                            <i class="fas fa-users" style="font-size: 32px; color: var(--primary);"></i>
+                        </div>
+                        <h3 class="card-title" style="font-size: 1.25rem;">Collaboration d'Équipe</h3>
+                        <p class="card-description">
+                            Communication fluide entre joueurs et staff pour une cohésion optimale
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenges Section -->
+    <section class="section section-bg-card">
+        <div class="container">
+            <div class="section-title">
+                <h2>Les Défis <span class="text-primary">Actuels</span></h2>
+                <p>Les problèmes que nous résolvons pour les clubs et joueurs de la Botola</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card-custom h-100">
+                        <div class="d-flex align-items-start gap-3">
+                            <div style="width: 48px; height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(215, 40, 47, 0.1); border-radius: var(--radius);">
+                                <i class="fas fa-exclamation-triangle" style="font-size: 24px; color: var(--primary);"></i>
+                            </div>
+                            <div>
+                                <h3 class="card-title" style="font-size: 1.25rem; margin-bottom: 0.5rem;">Accès Limité aux Analyses</h3>
+                                <p class="card-description" style="margin-bottom: 0;">
+                                    Les joueurs n'ont pas accès aux outils d'analyse professionnels utilisés dans les grandes ligues européennes
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card-custom h-100">
+                        <div class="d-flex align-items-start gap-3">
+                            <div style="width: 48px; height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(215, 40, 47, 0.1); border-radius: var(--radius);">
+                                <i class="fas fa-puzzle-piece" style="font-size: 24px; color: var(--primary);"></i>
+                            </div>
+                            <div>
+                                <h3 class="card-title" style="font-size: 1.25rem; margin-bottom: 0.5rem;">Conseils Tactiques Génériques</h3>
+                                <p class="card-description" style="margin-bottom: 0;">
+                                    Les recommandations ne sont pas personnalisées selon le poste et le style de jeu spécifique
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card-custom h-100">
+                        <div class="d-flex align-items-start gap-3">
+                            <div style="width: 48px; height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(215, 40, 47, 0.1); border-radius: var(--radius);">
+                                <i class="fas fa-comments" style="font-size: 24px; color: var(--primary);"></i>
+                            </div>
+                            <div>
+                                <h3 class="card-title" style="font-size: 1.25rem; margin-bottom: 0.5rem;">Communication Fragmentée</h3>
+                                <p class="card-description" style="margin-bottom: 0;">
+                                    Les échanges entre staff et joueurs se font via multiples canaux non sécurisés
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card-custom h-100">
+                        <div class="d-flex align-items-start gap-3">
+                            <div style="width: 48px; height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(215, 40, 47, 0.1); border-radius: var(--radius);">
+                                <i class="fas fa-chart-bar" style="font-size: 24px; color: var(--primary);"></i>
+                            </div>
+                            <div>
+                                <h3 class="card-title" style="font-size: 1.25rem; margin-bottom: 0.5rem;">Suivi Incomplet des Performances</h3>
+                                <p class="card-description" style="margin-bottom: 0;">
+                                    Absence de plateforme centralisée pour suivre l'évolution longitudinale des performances
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nos <span class="text-gradient">Solutions</span></h2>
+                <p>Des outils puissants pour transformer votre approche du football professionnel</p>
+            </div>
+            
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <div class="card-custom h-100">
+                        <div class="mb-4" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background: rgba(215, 40, 47, 0.1); border-radius: var(--radius);">
+                            <i class="fas fa-tachometer-alt" style="font-size: 32px; color: var(--primary);"></i>
+                        </div>
+                        <h3 class="card-title">Tableaux de Bord Personnalisés</h3>
+                        <p class="card-description">
+                            <strong class="text-primary">Par position :</strong> Attaquant, Milieu, Défenseur, Gardien
+                        </p>
+                        <ul class="list-unstyled" style="color: var(--muted-foreground); line-height: 1.8;">
+                            <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i> KPIs spécifiques au poste</li>
+                            <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i> Suivi de progression détaillé</li>
+                            <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i> Comparaison avec pairs du même poste</li>
+                            <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i> Objectifs personnalisés et atteignables</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="card-custom h-100">
+                        <div class="mb-4" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background: rgba(0, 98, 37, 0.1); border-radius: var(--radius);">
+                            <i class="fas fa-video" style="font-size: 32px; color: var(--secondary);"></i>
+                        </div>
+                        <h3 class="card-title">Analyse Vidéo Professionnelle</h3>
+                        <p class="card-description">
+                            <strong class="text-secondary">Outils avancés</strong> pour décortiquer chaque action de jeu
+                        </p>
+                        <ul class="list-unstyled" style="color: var(--muted-foreground); line-height: 1.8;">
+                            <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i> Annotations tactiques précises</li>
+                            <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i> Organisation par match et séquence</li>
+                            <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i> Comparaison actions similaires</li>
+                            <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i> Partage sécurisé avec le staff</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="card-custom h-100">
+                        <div class="mb-4" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background: rgba(212, 175, 55, 0.1); border-radius: var(--radius);">
+                            <i class="fas fa-brain" style="font-size: 32px; color: var(--accent);"></i>
+                        </div>
+                        <h3 class="card-title">Recommandations Intelligentes</h3>
+                        <p class="card-description">
+                            <strong class="text-accent">IA tactique</strong> adaptée à votre profil unique
+                        </p>
+                        <ul class="list-unstyled" style="color: var(--muted-foreground); line-height: 1.8;">
+                            <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i> Analyse adversaire approfondie</li>
+                            <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i> Conseils positionnement optimal</li>
+                            <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i> Stratégies match par match</li>
+                            <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i> Points d'amélioration prioritaires</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section section-bg-card">
+        <div class="container">
+            <div class="section-title">
+                <h2>Impact <span class="text-accent">Mesurable</span></h2>
+                <p>Les résultats concrets de Bottola Performance Hub sur le terrain</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card text-center">
+                        <div class="stat-card-value text-primary" data-count="30">0</div>
+                        <div class="stat-card-label">Amélioration Performance (%)</div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card text-center">
+                        <div class="stat-card-value text-secondary" data-count="50">0</div>
+                        <div class="stat-card-label">Réduction Temps Préparation (%)</div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card text-center">
+                        <div class="stat-card-value text-accent" data-count="100">0</div>
+                        <div class="stat-card-label">Joueurs Actifs</div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card text-center">
+                        <div class="stat-card-value text-primary" data-count="20">0</div>
+                        <div class="stat-card-label">Clubs Partenaires</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+        <div class="container">
+            <div class="card-custom text-center p-5" style="background: linear-gradient(135deg, var(--card), var(--muted));">
+                <h2 class="mb-4">Prêt à <span class="text-gradient">Révolutionner</span> Votre Performance ?</h2>
+                <p class="hero-description mx-auto mb-5" style="max-width: 700px;">
+                    Rejoignez les clubs et joueurs qui font déjà confiance à Bottola Performance Hub 
+                    pour transformer leur approche du football professionnel.
+                </p>
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                    <a href="contact.html" class="btn-primary-custom">
+                        DEMANDER UNE DÉMO
+                        <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                    <a href="solutions.html" class="btn-outline-custom">
+                        DÉCOUVRIR NOS SOLUTIONS
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-5">
+                    <div class="d-flex align-items-center gap-2 mb-4">
+                        <div style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--secondary), var(--primary)); border-radius: var(--radius);">
+                            <i class="fas fa-chart-line" style="color: white;"></i>
+                        </div>
+                        <span style="font-size: 1.25rem; font-weight: 700; font-family: var(--font-display);">BOTTOLA PERFORMANCE HUB</span>
+                    </div>
+                    <p class="card-description mb-4">
+                        Révolutionner la performance des joueurs de la Botola marocaine grâce à la technologie et l'analyse de données.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <div class="footer-social"><i class="fab fa-facebook-f"></i></div>
+                        <div class="footer-social"><i class="fab fa-twitter"></i></div>
+                        <div class="footer-social"><i class="fab fa-instagram"></i></div>
+                        <div class="footer-social"><i class="fab fa-linkedin-in"></i></div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h4 style="font-weight: 700; margin-bottom: 1.5rem;">Navigation</h4>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-3"><a href="index.html">Accueil</a></li>
+                        <li class="mb-3"><a href="about.html">À Propos</a></li>
+                        <li class="mb-3"><a href="solutions.html">Solutions</a></li>
+                        <li class="mb-3"><a href="stats.html">Statistiques</a></li>
+                        <li class="mb-3"><a href="technology.html">Technologie</a></li>
+                        <li class="mb-3"><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <h4 style="font-weight: 700; margin-bottom: 1.5rem;">Contact</h4>
+                    <ul class="list-unstyled">
+                        <li class="d-flex align-items-center gap-2 mb-3">
+                            <i class="fas fa-envelope text-primary"></i>
+                            <a href="mailto:contact@bottolahub.ma" class="card-description" style="text-decoration: none;">contact@bottolahub.ma</a>
+                        </li>
+                        <li class="d-flex align-items-center gap-2 mb-3">
+                            <i class="fas fa-phone text-primary"></i>
+                            <a href="tel:+212522000000" class="card-description" style="text-decoration: none;">+212 5 22 00 00 00</a>
+                        </li>
+                        <li class="d-flex align-items-center gap-2 mb-3">
+                            <i class="fas fa-map-marker-alt text-primary"></i>
+                            <span class="card-description">Casablanca, Maroc</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row mt-5 pt-4" style="border-top: 1px solid rgba(45, 45, 45, 0.2);">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="card-description mb-0">© 2025 Bottola Performance Hub. Tous droits réservés.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <span class="card-description me-4" style="cursor: pointer;">Mentions Légales</span>
+                    <span class="card-description" style="cursor: pointer;">Confidentialité</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

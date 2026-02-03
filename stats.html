@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Statistiques & Analyse - Bottola Performance Hub</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a href="index.html" class="navbar-brand-custom">
+                <div class="navbar-logo-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div>
+                    <div class="navbar-brand-text-main">BOTTOLA</div>
+                    <div class="navbar-brand-text-sub">PERFORMANCE HUB</div>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center gap-lg-4">
+                    <li class="nav-item">
+                        <a class="nav-link-custom" href="index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-custom" href="about.html">À Propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-custom" href="solutions.html">Solutions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-custom active" href="stats.html">Statistiques</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-custom" href="technology.html">Technologie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-custom" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" style="min-height: 60vh; padding-top: 140px; padding-bottom: 100px;">
+        <div class="hero-bg">
+            <div class="hero-bg-overlay-1"></div>
+            <div class="hero-bg-overlay-2"></div>
+        </div>
+        
+        <div class="container hero-content">
+            <div class="text-center">
+                <div class="hero-badge mx-auto">
+                    <span class="hero-badge-dot"></span>
+                    Analyse de Performance
+                </div>
+                
+                <h1 class="hero-title">
+                    STATISTIQUES <span class="text-gradient">& ANALYSE</span>
+                </h1>
+                
+                <p class="hero-description mx-auto">
+                    Visualisez vos données en temps réel avec des graphiques interactifs et des insights actionnables
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Graphiques Chart.js -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tableaux de Bord <span class="text-primary">Interactifs</span></h2>
+                <p>Analyse complète de vos performances avec des visualisations dynamiques</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Graphique Radar -->
+                <div class="col-lg-6">
+                    <div class="card-custom">
+                        <h3 class="card-title text-center mb-4">
+                            <i class="fas fa-chart-area text-primary me-2"></i>
+                            Performance par Attribut
+                        </h3>
+                        <canvas id="positionChart" style="max-height: 400px;"></canvas>
+                        <p class="text-center mt-3" style="color: var(--muted-foreground); font-size: 0.9rem;">
+                            Comparaison avec la moyenne de la ligue
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Graphique Ligne -->
+                <div class="col-lg-6">
+                    <div class="card-custom">
+                        <h3 class="card-title text-center mb-4">
+                            <i class="fas fa-chart-line text-secondary me-2"></i>
+                            Évolution des Notes
+                        </h3>
+                        <canvas id="performanceLineChart" style="max-height: 400px;"></canvas>
+                        <p class="text-center mt-3" style="color: var(--muted-foreground); font-size: 0.9rem;">
+                            Performance sur les 10 derniers matchs
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Graphique Donut -->
+                <div class="col-lg-6">
+                    <div class="card-custom">
+                        <h3 class="card-title text-center mb-4">
+                            <i class="fas fa-chart-pie text-accent me-2"></i>
+                            Répartition des Actions
+                        </h3>
+                        <canvas id="statsDonutChart" style="max-height: 400px;"></canvas>
+                        <p class="text-center mt-3" style="color: var(--muted-foreground); font-size: 0.9rem;">
+                            Actions clés de la saison
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Graphique Barres -->
+                <div class="col-lg-6">
+                    <div class="card-custom">
+                        <h3 class="card-title text-center mb-4">
+                            <i class="fas fa-chart-bar text-primary me-2"></i>
+                            Comparaison Ligue
+                        </h3>
+                        <canvas id="comparisonBarChart" style="max-height: 400px;"></canvas>
+                        <p class="text-center mt-3" style="color: var(--muted-foreground); font-size: 0.9rem;">
+                            Vous vs Top 3 de la ligue
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Barres de Compétences -->
+    <section class="section section-bg-card">
+        <div class="container">
+            <div class="section-title">
+                <h2>Compétences <span class="text-secondary">Détaillées</span></h2>
+                <p>Analyse approfondie de vos aptitudes techniques et physiques</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Compétences Techniques -->
+                <div class="col-lg-6">
+                    <div class="card-custom">
+                        <h3 class="card-title mb-4">
+                            <i class="fas fa-futbol text-primary me-2"></i>
+                            Compétences Techniques
+                        </h3>
+                        
+                        <!-- Dribble -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span style="font-weight: 600;">Dribble</span>
+                                <span class="text-primary" style="font-weight: 700;">85%</span>
+                            </div>
+                            <div class="skill-bar" data-percentage="85" style="background: var(--muted); height: 12px; border-radius: 10px; overflow: hidden;">
+                                <div class="skill-bar-fill" style="width: 0; height: 100%; background: linear-gradient(90deg, var(--primary), #a51f24); transition: width 1.5s ease; border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contrôle -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span style="font-weight: 600;">Contrôle de Balle</span>
+                                <span class="text-secondary" style="font-weight: 700;">92%</span>
+                            </div>
+                            <div class="skill-bar" data-percentage="92" style="background: var(--muted); height: 12px; border-radius: 10px; overflow: hidden;">
+                                <div class="skill-bar-fill" style="width: 0; height: 100%; background: linear-gradient(90deg, var(--secondary), #004d1c); transition: width 1.5s ease; border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tirs -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span style="font-weight: 600;">Précision des Tirs</span>
+                                <span class="text-accent" style="font-weight: 700;">78%</span>
+                            </div>
+                            <div class="skill-bar" data-percentage="78" style="background: var(--muted); height: 12px; border-radius: 10px; overflow: hidden;">
+                                <div class="skill-bar-fill" style="width: 0; height: 100%; background: linear-gradient(90deg, var(--accent), #b89a2f); transition: width 1.5s ease; border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Passes -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span style="font-weight: 600;">Passes Décisives</span>
+                                <span class="text-primary" style="font-weight: 700;">88%</span>
+                            </div>
+                            <div class="skill-bar" data-percentage="88" style="background: var(--muted); height: 12px; border-radius: 10px; overflow: hidden;">
+                                <div class="skill-bar-fill" style="width: 0; height: 100%; background: linear-gradient(90deg, var(--primary), #a51f24); transition: width 1.5s ease; border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Compétences Physiques -->
+                <div class="col-lg-6">
+                    <div class="card-custom">
+                        <h3 class="card-title mb-4">
+                            <i class="fas fa-running text-secondary me-2"></i>
+                            Compétences Physiques
+                        </h3>
+                        
+                        <!-- Vitesse -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span style="font-weight: 600;">Vitesse</span>
+                                <span class="text-secondary" style="font-weight: 700;">90%</span>
+                            </div>
+                            <div class="skill-bar" data-percentage="90" style="background: var(--muted); height: 12px; border-radius: 10px; overflow: hidden;">
+                                <div class="skill-bar-fill" style="width: 0; height: 100%; background: linear-gradient(90deg, var(--secondary), #004d1c); transition: width 1.5s ease; border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Endurance -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span style="font-weight: 600;">Endurance</span>
+                                <span class="text-primary" style="font-weight: 700;">86%</span>
+                            </div>
+                            <div class="skill-bar" data-percentage="86" style="background: var(--muted); height: 12px; border-radius: 10px; overflow: hidden;">
+                                <div class="skill-bar-fill" style="width: 0; height: 100%; background: linear-gradient(90deg, var(--primary), #a51f24); transition: width 1.5s ease; border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Force -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span style="font-weight: 600;">Force Physique</span>
+                                <span class="text-accent" style="font-weight: 700;">82%</span>
+                            </div>
+                            <div class="skill-bar" data-percentage="82" style="background: var(--muted); height: 12px; border-radius: 10px; overflow: hidden;">
+                                <div class="skill-bar-fill" style="width: 0; height: 100%; background: linear-gradient(90deg, var(--accent), #b89a2f); transition: width 1.5s ease; border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Agilité -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span style="font-weight: 600;">Agilité</span>
+                                <span class="text-secondary" style="font-weight: 700;">88%</span>
+                            </div>
+                            <div class="skill-bar" data-percentage="88" style="background: var(--muted); height: 12px; border-radius: 10px; overflow: hidden;">
+                                <div class="skill-bar-fill" style="width: 0; height: 100%; background: linear-gradient(90deg, var(--secondary), #004d1c); transition: width 1.5s ease; border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+        <div class="container">
+            <div class="card-custom text-center p-5">
+                <h2 class="mb-4">Accédez à Vos <span class="text-gradient">Statistiques Personnalisées</span></h2>
+                <p class="hero-description mx-auto mb-5">
+                    Créez votre compte et commencez à suivre vos performances en temps réel
+                </p>
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                    <a href="contact.html" class="btn-primary-custom">
+                        <i class="fas fa-user-plus me-2"></i>
+                        CRÉER UN COMPTE
+                    </a>
+                    <a href="solutions.html" class="btn-outline-custom">
+                        <i class="fas fa-info-circle me-2"></i>
+                        EN SAVOIR PLUS
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-5">
+                    <div class="d-flex align-items-center gap-2 mb-4">
+                        <div style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--secondary), var(--primary)); border-radius: var(--radius);">
+                            <i class="fas fa-chart-line" style="color: white;"></i>
+                        </div>
+                        <span style="font-size: 1.25rem; font-weight: 700; font-family: var(--font-display);">BOTTOLA PERFORMANCE HUB</span>
+                    </div>
+                    <p class="card-description mb-4">
+                        Révolutionner la performance des joueurs de la Botola marocaine grâce à la technologie et l'analyse de données.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <div class="footer-social"><i class="fab fa-facebook-f"></i></div>
+                        <div class="footer-social"><i class="fab fa-twitter"></i></div>
+                        <div class="footer-social"><i class="fab fa-instagram"></i></div>
+                        <div class="footer-social"><i class="fab fa-linkedin-in"></i></div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h4 style="font-weight: 700; margin-bottom: 1.5rem;">Navigation</h4>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-3"><a href="index.html">Accueil</a></li>
+                        <li class="mb-3"><a href="about.html">À Propos</a></li>
+                        <li class="mb-3"><a href="solutions.html">Solutions</a></li>
+                        <li class="mb-3"><a href="stats.html">Statistiques</a></li>
+                        <li class="mb-3"><a href="technology.html">Technologie</a></li>
+                        <li class="mb-3"><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <h4 style="font-weight: 700; margin-bottom: 1.5rem;">Contact</h4>
+                    <ul class="list-unstyled">
+                        <li class="d-flex align-items-center gap-2 mb-3">
+                            <i class="fas fa-envelope text-primary"></i>
+                            <span class="card-description">contact@bottolahub.ma</span>
+                        </li>
+                        <li class="d-flex align-items-center gap-2 mb-3">
+                            <i class="fas fa-phone text-primary"></i>
+                            <span class="card-description">+212 5 22 00 00 00</span>
+                        </li>
+                        <li class="d-flex align-items-center gap-2 mb-3">
+                            <i class="fas fa-map-marker-alt text-primary"></i>
+                            <span class="card-description">Casablanca, Maroc</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row mt-5 pt-4" style="border-top: 1px solid rgba(45, 45, 45, 0.2);">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="card-description mb-0">© 2025 Bottola Performance Hub. Tous droits réservés.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <span class="card-description me-4">Mentions Légales</span>
+                    <span class="card-description">Confidentialité</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Chart.js Initialization -->
+    <script>
+    // Configuration des couleurs
+    const colors = {
+        primary: '#D7282F',
+        secondary: '#006225',
+        accent: '#D4AF37',
+        background: '#0F0F0F',
+        card: '#1A1A1A',
+        text: '#F5F5F5',
+        muted: '#A0A0A0'
+    };
+
+    // Graphique Radar - Performance par Attribut
+    const radarCtx = document.getElementById('positionChart').getContext('2d');
+    new Chart(radarCtx, {
+        type: 'radar',
+        data: {
+            labels: ['Vitesse', 'Technique', 'Tactique', 'Physique', 'Mental', 'Intelligence'],
+            datasets: [{
+                label: 'Votre Niveau',
+                data: [85, 78, 92, 88, 75, 90],
+                backgroundColor: 'rgba(215, 40, 47, 0.2)',
+                borderColor: colors.primary,
+                borderWidth: 2,
+                pointBackgroundColor: colors.primary,
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2
+            }, {
+                label: 'Moyenne Ligue',
+                data: [70, 72, 75, 70, 68, 73],
+                backgroundColor: 'rgba(0, 98, 37, 0.2)',
+                borderColor: colors.secondary,
+                borderWidth: 2,
+                pointBackgroundColor: colors.secondary,
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        stepSize: 20,
+                        color: colors.muted
+                    },
+                    grid: {
+                        color: 'rgba(160, 160, 160, 0.1)'
+                    },
+                    pointLabels: {
+                        color: colors.text,
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        color: colors.text,
+                        padding: 15
+                    }
+                }
+            }
+        }
+    });
+
+    // Graphique Ligne - Évolution
+    const lineCtx = document.getElementById('performanceLineChart').getContext('2d');
+    new Chart(lineCtx, {
+        type: 'line',
+        data: {
+            labels: ['J1', 'J2', 'J3', 'J4', 'J5', 'J6', 'J7', 'J8', 'J9', 'J10'],
+            datasets: [{
+                label: 'Note Globale',
+                data: [6.5, 7.0, 6.8, 7.5, 8.0, 7.8, 8.2, 8.5, 8.3, 8.8],
+                backgroundColor: 'rgba(215, 40, 47, 0.1)',
+                borderColor: colors.primary,
+                borderWidth: 3,
+                tension: 0.4,
+                fill: true,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                pointBackgroundColor: colors.primary,
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2
+            }, {
+                label: 'Objectif',
+                data: [7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
+                borderColor: colors.accent,
+                borderWidth: 2,
+                borderDash: [5, 5],
+                fill: false,
+                pointRadius: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        color: colors.text,
+                        padding: 15
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    min: 5,
+                    max: 10,
+                    ticks: {
+                        stepSize: 0.5,
+                        color: colors.muted
+                    },
+                    grid: {
+                        color: 'rgba(160, 160, 160, 0.1)'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: colors.muted
+                    },
+                    grid: {
+                        color: 'rgba(160, 160, 160, 0.1)'
+                    }
+                }
+            }
+        }
+    });
+
+    // Graphique Donut
+    const donutCtx = document.getElementById('statsDonutChart').getContext('2d');
+    new Chart(donutCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Passes Réussies', 'Tirs Cadrés', 'Duels Gagnés', 'Interceptions'],
+            datasets: [{
+                data: [450, 35, 120, 85],
+                backgroundColor: [
+                    colors.primary,
+                    colors.secondary,
+                    colors.accent,
+                    '#2C2C2C'
+                ],
+                borderColor: '#fff',
+                borderWidth: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        color: colors.text,
+                        padding: 15
+                    }
+                }
+            }
+        }
+    });
+
+    // Graphique Barres
+    const barCtx = document.getElementById('comparisonBarChart').getContext('2d');
+    new Chart(barCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Buts', 'Passes D.', 'Tirs/Match', 'Dribbles', 'Duels Aériens'],
+            datasets: [{
+                label: 'Vous',
+                data: [12, 8, 3.5, 2.8, 4.2],
+                backgroundColor: colors.primary,
+                borderColor: colors.primary,
+                borderWidth: 1
+            }, {
+                label: 'Top 3 Ligue',
+                data: [15, 10, 4.2, 3.5, 5.0],
+                backgroundColor: colors.secondary,
+                borderColor: colors.secondary,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        color: colors.text,
+                        padding: 15
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: colors.muted
+                    },
+                    grid: {
+                        color: 'rgba(160, 160, 160, 0.1)'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: colors.muted
+                    },
+                    grid: {
+                        color: 'rgba(160, 160, 160, 0.1)'
+                    }
+                }
+            }
+        }
+    });
+
+    // Animer les barres de compétences au chargement
+    document.addEventListener('DOMContentLoaded', function() {
+        const skillBars = document.querySelectorAll('.skill-bar');
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const percentage = bar.getAttribute('data-percentage');
+                    const fill = bar.querySelector('.skill-bar-fill');
+                    
+                    if (fill) {
+                        setTimeout(() => {
+                            fill.style.width = percentage + '%';
+                        }, 200);
+                    }
+                    
+                    observer.unobserve(bar);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        skillBars.forEach(bar => observer.observe(bar));
+    });
+    </script>
+</body>
+</html>

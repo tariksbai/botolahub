@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Bottola Performance Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a href="index.html" class="navbar-brand-custom">
+                <div class="navbar-logo-icon"><i class="fas fa-chart-line"></i></div>
+                <div>
+                    <div class="navbar-brand-text-main">BOTTOLA</div>
+                    <div class="navbar-brand-text-sub">PERFORMANCE HUB</div>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center gap-lg-4">
+                    <li class="nav-item"><a class="nav-link-custom" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link-custom" href="about.html">À Propos</a></li>
+                    <li class="nav-item"><a class="nav-link-custom" href="solutions.html">Solutions</a></li>
+                    <li class="nav-item"><a class="nav-link-custom" href="stats.html">Statistiques</a></li>
+                    <li class="nav-item"><a class="nav-link-custom" href="technology.html">Technologie</a></li>
+                    <li class="nav-item"><a class="nav-link-custom active" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" style="min-height: 60vh; padding-top: 140px; padding-bottom: 100px;">
+        <div class="hero-bg">
+            <div class="hero-bg-overlay-1"></div>
+            <div class="hero-bg-overlay-2"></div>
+        </div>
+        
+        <div class="container hero-content">
+            <div class="text-center">
+                <div class="hero-badge mx-auto">
+                    <span class="hero-badge-dot"></span>
+                    Contactez-Nous
+                </div>
+                
+                <h1 class="hero-title">
+                    PARLONS DE VOTRE <span class="text-gradient">PERFORMANCE</span>
+                </h1>
+                
+                <p class="hero-description mx-auto">
+                    Notre équipe est à votre écoute pour répondre à vos questions et vous accompagner
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section">
+        <div class="container">
+            <div class="row g-5">
+                <!-- Formulaire de Contact -->
+                <div class="col-lg-7">
+                    <div class="card-custom">
+                        <h2 class="card-title mb-4">
+                            <i class="fas fa-envelope text-primary me-2"></i>
+                            Envoyez-nous un Message
+                        </h2>
+                        
+                        <form id="contactForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" style="color: var(--text); font-weight: 600;">Nom Complet *</label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           id="name" 
+                                           name="name"
+                                           required
+                                           style="background: var(--muted); border: 1px solid var(--border); color: var(--text); padding: 0.875rem;">
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label class="form-label" style="color: var(--text); font-weight: 600;">Email *</label>
+                                    <input type="email" 
+                                           class="form-control" 
+                                           id="email" 
+                                           name="email"
+                                           required
+                                           style="background: var(--muted); border: 1px solid var(--border); color: var(--text); padding: 0.875rem;">
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label class="form-label" style="color: var(--text); font-weight: 600;">Téléphone</label>
+                                    <input type="tel" 
+                                           class="form-control" 
+                                           id="phone" 
+                                           name="phone"
+                                           placeholder="+212 6XX XX XX XX"
+                                           style="background: var(--muted); border: 1px solid var(--border); color: var(--text); padding: 0.875rem;">
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label class="form-label" style="color: var(--text); font-weight: 600;">Type de Demande *</label>
+                                    <select class="form-select" 
+                                            id="type" 
+                                            name="type"
+                                            required
+                                            style="background: var(--muted); border: 1px solid var(--border); color: var(--text); padding: 0.875rem;">
+                                        <option value="">Sélectionnez...</option>
+                                        <option value="demo">Demande de Démo</option>
+                                        <option value="club">Partenariat Club</option>
+                                        <option value="joueur">Inscription Joueur</option>
+                                        <option value="info">Demande d'Information</option>
+                                        <option value="support">Support Technique</option>
+                                        <option value="autre">Autre</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <label class="form-label" style="color: var(--text); font-weight: 600;">Club / Organisation</label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           id="organization" 
+                                           name="organization"
+                                           placeholder="Nom de votre club ou organisation"
+                                           style="background: var(--muted); border: 1px solid var(--border); color: var(--text); padding: 0.875rem;">
+                                </div>
+                                
+                                <div class="col-12">
+                                    <label class="form-label" style="color: var(--text); font-weight: 600;">Message *</label>
+                                    <textarea class="form-control" 
+                                              id="message" 
+                                              name="message"
+                                              rows="6" 
+                                              required
+                                              placeholder="Décrivez votre demande en détail..."
+                                              style="background: var(--muted); border: 1px solid var(--border); color: var(--text); padding: 0.875rem;"></textarea>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" 
+                                               type="checkbox" 
+                                               id="consent" 
+                                               name="consent"
+                                               required
+                                               style="background: var(--muted); border: 1px solid var(--border);">
+                                        <label class="form-check-label" for="consent" style="color: var(--muted-foreground);">
+                                            J'accepte que mes données soient utilisées pour traiter ma demande conformément à notre 
+                                            <a href="#" style="color: var(--primary);">politique de confidentialité</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <button type="submit" class="btn-primary-custom w-100">
+                                        <i class="fas fa-paper-plane me-2"></i>
+                                        ENVOYER LE MESSAGE
+                                    </button>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div id="formMessage" class="mt-3" style="display: none;"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Informations de Contact -->
+                <div class="col-lg-5">
+                    <!-- Coordonnées -->
+                    <div class="card-custom mb-4">
+                        <h3 class="card-title mb-4">
+                            <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                            Nos Coordonnées
+                        </h3>
+                        
+                        <div class="mb-4">
+                            <div class="d-flex align-items-start gap-3">
+                                <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(215, 40, 47, 0.1); border-radius: var(--radius); flex-shrink: 0;">
+                                    <i class="fas fa-envelope" style="color: var(--primary);"></i>
+                                </div>
+                                <div>
+                                    <h4 style="font-size: 0.875rem; color: var(--muted-foreground); margin-bottom: 0.25rem;">Email</h4>
+                                    <a href="mailto:contact@bottolahub.ma" style="color: var(--text); text-decoration: none; font-weight: 600;">
+                                        contact@bottolahub.ma
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="d-flex align-items-start gap-3">
+                                <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(0, 98, 37, 0.1); border-radius: var(--radius); flex-shrink: 0;">
+                                    <i class="fas fa-phone" style="color: var(--secondary);"></i>
+                                </div>
+                                <div>
+                                    <h4 style="font-size: 0.875rem; color: var(--muted-foreground); margin-bottom: 0.25rem;">Téléphone</h4>
+                                    <a href="tel:+212522000000" style="color: var(--text); text-decoration: none; font-weight: 600;">
+                                        +212 5 22 00 00 00
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="d-flex align-items-start gap-3">
+                                <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(212, 175, 55, 0.1); border-radius: var(--radius); flex-shrink: 0;">
+                                    <i class="fas fa-map-marker-alt" style="color: var(--accent);"></i>
+                                </div>
+                                <div>
+                                    <h4 style="font-size: 0.875rem; color: var(--muted-foreground); margin-bottom: 0.25rem;">Adresse</h4>
+                                    <p style="color: var(--text); font-weight: 600; margin: 0;">
+                                        Casablanca, Maroc<br>
+                                        <span style="font-size: 0.875rem; color: var(--muted-foreground);">Bureau disponible sur rendez-vous</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="d-flex align-items-start gap-3">
+                                <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(215, 40, 47, 0.1); border-radius: var(--radius); flex-shrink: 0;">
+                                    <i class="fas fa-clock" style="color: var(--primary);"></i>
+                                </div>
+                                <div>
+                                    <h4 style="font-size: 0.875rem; color: var(--muted-foreground); margin-bottom: 0.25rem;">Horaires</h4>
+                                    <p style="color: var(--text); font-weight: 600; margin: 0;">
+                                        Lun - Ven: 9h00 - 18h00<br>
+                                        Sam: 9h00 - 13h00
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Réseaux Sociaux -->
+                    <div class="card-custom">
+                        <h3 class="card-title mb-4">
+                            <i class="fas fa-share-alt text-secondary me-2"></i>
+                            Suivez-Nous
+                        </h3>
+                        
+                        <div class="d-flex gap-3">
+                            <a href="#" class="footer-social" style="width: 50px; height: 50px;">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="footer-social" style="width: 50px; height: 50px;">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="footer-social" style="width: 50px; height: 50px;">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="footer-social" style="width: 50px; height: 50px;">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                        
+                        <p class="card-description mt-4">
+                            Restez informé des dernières actualités et nouveautés de Bottola Performance Hub
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section section-bg-card">
+        <div class="container">
+            <div class="section-title">
+                <h2>Questions <span class="text-accent">Fréquentes</span></h2>
+                <p>Les réponses aux questions les plus courantes</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card-custom">
+                        <h3 class="card-title" style="font-size: 1.125rem;">
+                            <i class="fas fa-question-circle text-primary me-2"></i>
+                            Comment demander une démo ?
+                        </h3>
+                        <p class="card-description">
+                            Remplissez simplement le formulaire ci-dessus en sélectionnant "Demande de Démo". 
+                            Notre équipe vous contactera sous 24h pour organiser une présentation personnalisée.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card-custom">
+                        <h3 class="card-title" style="font-size: 1.125rem;">
+                            <i class="fas fa-question-circle text-secondary me-2"></i>
+                            Quel est le délai de réponse ?
+                        </h3>
+                        <p class="card-description">
+                            Nous nous engageons à répondre à toutes les demandes dans un délai de 24 à 48 heures ouvrables. 
+                            Les demandes urgentes sont traitées en priorité.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card-custom">
+                        <h3 class="card-title" style="font-size: 1.125rem;">
+                            <i class="fas fa-question-circle text-accent me-2"></i>
+                            Proposez-vous un support technique ?
+                        </h3>
+                        <p class="card-description">
+                            Oui, nous offrons un support technique complet à tous nos clients. 
+                            Sélectionnez "Support Technique" dans le formulaire pour nous faire part de votre problème.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card-custom">
+                        <h3 class="card-title" style="font-size: 1.125rem;">
+                            <i class="fas fa-question-circle text-primary me-2"></i>
+                            Puis-je visiter vos bureaux ?
+                        </h3>
+                        <p class="card-description">
+                            Absolument ! Nous recevons sur rendez-vous. Contactez-nous pour planifier une visite 
+                            et découvrir notre plateforme en action.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+        <div class="container">
+            <div class="card-custom text-center p-5">
+                <h2 class="mb-4">Besoin d'Aide <span class="text-gradient">Immédiate</span> ?</h2>
+                <p class="hero-description mx-auto mb-5">
+                    Notre équipe est disponible par téléphone pour répondre à vos questions urgentes
+                </p>
+                <a href="tel:+212522000000" class="btn-primary-custom">
+                    <i class="fas fa-phone me-2"></i>
+                    APPELEZ-NOUS MAINTENANT
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-5">
+                    <div class="d-flex align-items-center gap-2 mb-4">
+                        <div style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--secondary), var(--primary)); border-radius: var(--radius);">
+                            <i class="fas fa-chart-line" style="color: white;"></i>
+                        </div>
+                        <span style="font-size: 1.25rem; font-weight: 700; font-family: var(--font-display);">BOTTOLA PERFORMANCE HUB</span>
+                    </div>
+                    <p class="card-description mb-4">
+                        Révolutionner la performance des joueurs de la Botola marocaine grâce à la technologie et l'analyse de données.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <div class="footer-social"><i class="fab fa-facebook-f"></i></div>
+                        <div class="footer-social"><i class="fab fa-twitter"></i></div>
+                        <div class="footer-social"><i class="fab fa-instagram"></i></div>
+                        <div class="footer-social"><i class="fab fa-linkedin-in"></i></div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h4 style="font-weight: 700; margin-bottom: 1.5rem;">Navigation</h4>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-3"><a href="index.html">Accueil</a></li>
+                        <li class="mb-3"><a href="about.html">À Propos</a></li>
+                        <li class="mb-3"><a href="solutions.html">Solutions</a></li>
+                        <li class="mb-3"><a href="stats.html">Statistiques</a></li>
+                        <li class="mb-3"><a href="technology.html">Technologie</a></li>
+                        <li class="mb-3"><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <h4 style="font-weight: 700; margin-bottom: 1.5rem;">Contact</h4>
+                    <ul class="list-unstyled">
+                        <li class="d-flex align-items-center gap-2 mb-3">
+                            <i class="fas fa-envelope text-primary"></i>
+                            <a href="mailto:contact@bottolahub.ma" class="card-description" style="text-decoration: none;">contact@bottolahub.ma</a>
+                        </li>
+                        <li class="d-flex align-items-center gap-2 mb-3">
+                            <i class="fas fa-phone text-primary"></i>
+                            <a href="tel:+212522000000" class="card-description" style="text-decoration: none;">+212 5 22 00 00 00</a>
+                        </li>
+                        <li class="d-flex align-items-center gap-2 mb-3">
+                            <i class="fas fa-map-marker-alt text-primary"></i>
+                            <span class="card-description">Casablanca, Maroc</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row mt-5 pt-4" style="border-top: 1px solid rgba(45, 45, 45, 0.2);">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="card-description mb-0">© 2025 Bottola Performance Hub. Tous droits réservés.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <span class="card-description me-4" style="cursor: pointer;">Mentions Légales</span>
+                    <span class="card-description" style="cursor: pointer;">Confidentialité</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Form Validation Script -->
+    <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formMessage = document.getElementById('formMessage');
+        const submitBtn = this.querySelector('button[type="submit"]');
+        
+        // Disable button
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>ENVOI EN COURS...';
+        
+        // Simulate form submission (replace with actual AJAX call)
+        setTimeout(function() {
+            // Success message
+            formMessage.style.display = 'block';
+            formMessage.className = 'alert alert-success';
+            formMessage.innerHTML = '<i class="fas fa-check-circle me-2"></i><strong>Message envoyé avec succès !</strong> Nous vous répondrons dans les plus brefs délais.';
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
+            
+            // Re-enable button
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>ENVOYER LE MESSAGE';
+            
+            // Hide message after 5 seconds
+            setTimeout(function() {
+                formMessage.style.display = 'none';
+            }, 5000);
+            
+        }, 2000);
+    });
+    
+    // Real-time validation
+    const inputs = document.querySelectorAll('#contactForm input, #contactForm select, #contactForm textarea');
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            if (this.hasAttribute('required') && !this.value) {
+                this.style.borderColor = 'var(--primary)';
+            } else {
+                this.style.borderColor = 'var(--border)';
+            }
+        });
+        
+        input.addEventListener('input', function() {
+            if (this.style.borderColor === 'rgb(215, 40, 47)') {
+                this.style.borderColor = 'var(--border)';
+            }
+        });
+    });
+    </script>
+</body>
+</html>
