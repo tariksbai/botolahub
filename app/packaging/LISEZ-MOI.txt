@@ -1,0 +1,24 @@
+BOTTOLA ANALYSE — version d'aperçu pour Windows
+================================================
+
+Lancer l'application
+--------------------
+1. Décompressez le fichier ZIP (clic droit › Extraire tout…), par exemple dans D:\botola.
+2. Ouvrez le dossier « BottolaAnalyse » et double-cliquez sur BottolaAnalyse.exe.
+
+Rien d'autre à installer : Python et FFmpeg sont inclus dans le dossier.
+
+Avertissement de Windows
+------------------------
+Cette version d'aperçu n'est pas encore signée numériquement. Au premier lancement,
+Windows peut afficher « Windows a protégé votre ordinateur » : cliquez sur
+« Informations complémentaires » puis « Exécuter quand même ».
+
+Premiers pas
+------------
+- Importer une vidéo : bouton « Importer une vidéo », ou glissez le fichier dans la fenêtre.
+- Taguer : touches 1 à 0 (grille par défaut), Espace pour lecture/pause,
+  flèches pour avancer image par image. F1 affiche tous les raccourcis.
+- Test de précision du lecteur (jalon J1) : bouton « Test J1 » dans la barre de gauche.
+
+Vos matchs et vos tags restent sur cet ordinateur ; aucune vidéo n'est envoyée sur Internet.
