@@ -17,6 +17,17 @@ Tout le traitement se fait sur la machine de l'utilisateur : aucune vidéo ne qu
 | P07 | Playlists | stockage prêt, écran à faire |
 | P08–P10 | Export MP4, XML Sportscode, floutage | à faire |
 
+## Version Windows à télécharger (aperçu)
+
+À chaque modification, GitHub construit un dossier autonome `BottolaAnalyse` (Python et
+FFmpeg inclus) : onglet **Actions** › « Application — paquet Windows » › dernière exécution ›
+artefact **BottolaAnalyse-windows**. Décompresser puis lancer `BottolaAnalyse.exe`
+(voir `packaging/LISEZ-MOI.txt`). Version non signée : Windows peut demander une confirmation.
+
+Construction locale : `pip install pyinstaller && pyinstaller packaging/bottola.spec`, puis
+copier `ffmpeg` et `ffprobe` dans `dist/BottolaAnalyse/ffmpeg/` et vérifier avec
+`python tools/smoke_packaged.py dist/BottolaAnalyse`.
+
 ## Lancer l'application (poste de développement)
 
 ```bash

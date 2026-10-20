@@ -13,16 +13,20 @@ inclure libopenh264 et exclure libx264 (voir app/docs/ffmpeg.md).
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import subprocess
+import sys
 from collections.abc import Callable
 from dataclasses import dataclass
 from fractions import Fraction
 from pathlib import Path
 
 SUPPORTED_EXTENSIONS = (".mp4", ".mkv", ".avi", ".mov", ".m4v", ".mts", ".webm")
-ENCODER_PREFERENCE = ("libopenh264", "libx264")
+# libopenh264 (BSD) et les codeurs du système (Media Foundation sous Windows, VideoToolbox
+# sous macOS) laissent FFmpeg sous LGPL ; libx264 (GPL) ne sert qu'en développement.
+ENCODER_PREFERENCE = ("libopenh264", "h264_mf", "h264_videotoolbox", "libx264")
 GPL_ENCODERS = {"libx264"}
 KEYFRAME_SECONDS = 2
 
@@ -58,7 +62,22 @@ class VideoInfo:
         )
 
 
+def bundled_ffmpeg_dir() -> Path | None:
+    """Dossier `ffmpeg/` livré à côté de l'exécutable de l'application empaquetée."""
+    override = os.environ.get("BPH_FFMPEG_DIR")
+    if override:
+        return Path(override)
+    if getattr(sys, "frozen", False):
+        return Path(sys.executable).resolve().parent / "ffmpeg"
+    return None
+
+
 def find_tool(name: str) -> str:
+    folder = bundled_ffmpeg_dir()
+    if folder is not None:
+        for candidate in (folder / f"{name}.exe", folder / name):
+            if candidate.is_file():
+                return str(candidate)
     path = shutil.which(name)
     if not path:
         raise VideoError(f"{name} introuvable : FFmpeg doit être installé avec l'application")

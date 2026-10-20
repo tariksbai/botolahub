@@ -68,6 +68,8 @@ def make(output: str | Path, minutes: float = 5, fps: int = 25, width: int = 128
                "-pix_fmt", "yuv420p", "-g", str(gop_seconds * fps), str(output)]
         if encoder == "libx264":
             cmd[-1:-1] = ["-bf", "2", "-crf", "18"]
+        else:
+            cmd[-1:-1] = ["-b:v", "4M"]
         proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
         assert proc.stdin is not None
         base = np.full((height, width), 90, np.uint8)

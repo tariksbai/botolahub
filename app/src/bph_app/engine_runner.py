@@ -21,6 +21,8 @@ def engine_command(*args: str) -> tuple[str, list[str]]:
     exe = os.environ.get("BPH_ENGINE")
     if exe:
         return exe, list(args)
+    if getattr(sys, "frozen", False):   # application empaquetée : le même exécutable sert de moteur
+        return sys.executable, ["--engine", *args]
     return sys.executable, ["-m", "bph_engine", *args]
 
 

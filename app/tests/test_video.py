@@ -41,3 +41,15 @@ def test_variable_frame_rate_is_detected_and_fixed(tmp_path: Path) -> None:
     info = probe(src)
     out = normalize(info, tmp_path / "norm.mp4")
     assert not out.variable_frame_rate and not out.needs_normalization()
+
+
+def test_bundled_ffmpeg_is_preferred(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    from bph_engine.video import find_tool
+
+    fake = tmp_path / "ffmpeg"
+    fake.write_text("#!/bin/sh\n")
+    fake.chmod(0o755)
+    monkeypatch.setenv("BPH_FFMPEG_DIR", str(tmp_path))
+    assert find_tool("ffmpeg") == str(fake)
+    monkeypatch.delenv("BPH_FFMPEG_DIR")
+    assert find_tool("ffmpeg") != str(fake)

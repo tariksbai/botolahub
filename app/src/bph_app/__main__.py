@@ -6,7 +6,7 @@ import os
 import sys
 from pathlib import Path
 
-from PySide6.QtCore import QLibraryInfo, QLocale, QStandardPaths, Qt, QTranslator
+from PySide6.QtCore import QLibraryInfo, QLocale, QStandardPaths, Qt, QTimer, QTranslator
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import QApplication
 
@@ -51,6 +51,9 @@ def main() -> int:
     store = Store(root / "bibliotheque.sqlite")
     window = MainWindow(store, root / "videos")
     window.show()
+    smoke = os.environ.get("BPH_SMOKE_QUIT_MS")   # contrôle de démarrage de l'exécutable en CI
+    if smoke:
+        QTimer.singleShot(int(smoke), app.quit)
     code = app.exec()
     store.close()
     return code

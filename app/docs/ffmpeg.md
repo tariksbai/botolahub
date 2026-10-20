@@ -20,9 +20,15 @@ images). Résultat : H.264, yuv420p, une image clé toutes les 2 secondes, audio
 conteneur MP4. Une source à cadence constante garde exactement ses images ; une source
 à cadence variable est rééchantillonnée à cadence constante.
 
+## FFmpeg livré dans le paquet Windows
+
+Le paquet d'aperçu embarque le build **LGPL** de BtbN/FFmpeg-Builds (`win64-lgpl`), qui
+contient `libopenh264` et pas `libx264`. `tools/smoke_packaged.py` refuse tout FFmpeg livré
+compilé avec `--enable-gpl`. Le test J1 passe avec une vidéo encodée par `libopenh264`.
+
 ## Décision à prendre (registre des décisions)
 
-- Configuration de compilation FFmpeg livrée : `--disable-gpl --disable-nonfree --enable-libopenh264`
-  + décodeurs nécessaires (h264, hevc, mpeg4, prores…). À figer et documenter avant le packaging.
+- Figer une version précise de FFmpeg (le paquet d'aperçu prend la dernière version LGPL)
+  et sa configuration de compilation avant la version commerciale.
 - Qualité de `libopenh264` (débit fixe, 8 Mb/s par défaut) contre le poids des fichiers normalisés :
   arbitrage à faire sur de vrais matchs.

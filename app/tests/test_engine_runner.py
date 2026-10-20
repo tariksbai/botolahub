@@ -30,3 +30,24 @@ def test_engine_failure_is_reported(qtbot, tmp_path: Path) -> None:  # type: ign
         job.start()
     ok, message = blocker.args
     assert not ok and "rien.mp4" in message
+
+
+def test_packaged_app_runs_engine_from_its_own_executable(monkeypatch) -> None:  # type: ignore[no-untyped-def]
+    import sys
+
+    from bph_app.engine_runner import engine_command
+
+    monkeypatch.delenv("BPH_ENGINE", raising=False)
+    monkeypatch.setattr(sys, "frozen", True, raising=False)
+    assert engine_command("probe", "x.mp4") == (sys.executable, ["--engine", "probe", "x.mp4"])
+
+
+def test_engine_mode_of_the_app_entry_point(counter_video: Path, monkeypatch, capsys) -> None:  # type: ignore[no-untyped-def]
+    import json
+    import sys
+
+    from bph_app.launch import main
+
+    monkeypatch.setattr(sys, "argv", ["BottolaAnalyse", "--engine", "probe", str(counter_video)])
+    assert main() == 0
+    assert json.loads(capsys.readouterr().out)["frame_count"] == 1000
