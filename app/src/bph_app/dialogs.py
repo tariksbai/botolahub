@@ -7,7 +7,7 @@ import threading
 from pathlib import Path
 
 from PySide6.QtCore import QDate, QObject, Qt, Signal
-from PySide6.QtGui import QColor, QKeySequence
+from PySide6.QtGui import QColor, QIcon, QKeySequence
 from PySide6.QtMultimedia import QVideoSink
 from PySide6.QtWidgets import (
     QColorDialog,
@@ -32,6 +32,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
+from bph_app import theme
 from bph_app.counter_code import make as make_counter_video
 from bph_app.player import FramePlayer
 from bph_app.seek_check import Report, SeekCheck
@@ -42,6 +43,16 @@ from bph_engine.video import VideoError, probe
 RESERVED_KEYS = {"SPACE", "LEFT", "RIGHT", "UP", "DOWN", "HOME", "END", "DEL", "DELETE", "J", "K", "L", "I", "O"}
 
 
+def primary(buttons: QDialogButtonBox, which: QDialogButtonBox.StandardButton, text: str) -> None:
+    """Met en avant le bouton de validation d'une boîte de dialogue, sans icône système."""
+    for b in buttons.buttons():
+        b.setIcon(QIcon())
+    button = buttons.button(which)
+    if button is not None:
+        button.setText(text)
+        theme.style(button, variant="primary")
+
+
 class MatchDialog(QDialog):
     """Saisie des métadonnées d'un match (import et modification)."""
 
@@ -50,6 +61,8 @@ class MatchDialog(QDialog):
         super().__init__(parent)
         self.setWindowTitle("Fiche du match" if match else f"Importer — {video_name}")
         form = QFormLayout()
+        form.setVerticalSpacing(10)
+        form.setHorizontalSpacing(16)
         self.client = QComboBox(editable=True)
         self.client.addItems([""] + store.clients())
         line = self.client.lineEdit()
@@ -87,6 +100,7 @@ class MatchDialog(QDialog):
             self.home_score.setValue(-1 if match.home_score is None else match.home_score)
             self.away_score.setValue(-1 if match.away_score is None else match.away_score)
         buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel)
+        primary(buttons, QDialogButtonBox.StandardButton.Ok, "Valider")
         buttons.accepted.connect(self.accept)
         buttons.rejected.connect(self.reject)
         lay = QVBoxLayout(self)
@@ -113,7 +127,7 @@ class MatchDialog(QDialog):
 def _score_box() -> QSpinBox:
     box = QSpinBox(minimum=-1, maximum=99, value=-1)
     box.setSpecialValueText("—")
-    box.setFixedWidth(60)
+    box.setFixedWidth(76)
     return box
 
 
@@ -132,18 +146,23 @@ class CodeGridDialog(QDialog):
         super().__init__(parent)
         self.store = store
         self.setWindowTitle("Grille de codes")
-        self.resize(620, 460)
+        self.resize(700, 520)
         self.table = QTableWidget(0, len(self.HEADERS))
+        self.table.setShowGrid(False)
+        self.table.verticalHeader().hide()
+        self.table.verticalHeader().setDefaultSectionSize(40)
+        self.table.horizontalHeader().setHighlightSections(False)
         self.table.setHorizontalHeaderLabels(self.HEADERS)
         self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
         self.table.cellDoubleClicked.connect(self._pick_color)
         for c in store.codes():
             self._add_row(c.id, c.label, c.shortcut, c.color, c.lead_seconds, c.lag_seconds)
-        add = QPushButton("Ajouter un code")
+        add = theme.decorate(QPushButton("Ajouter un code"), "plus")
         add.clicked.connect(lambda: self._add_row(None, "Nouveau code", "", "#1f6feb", 5, 5))
-        remove = QPushButton("Supprimer")
+        remove = theme.decorate(QPushButton("Supprimer"), "trash", "danger")
         remove.clicked.connect(lambda: self.table.removeRow(self.table.currentRow()))
-        up, down = QPushButton("Monter"), QPushButton("Descendre")
+        up = theme.decorate(QPushButton("Monter"), "up", "ghost")
+        down = theme.decorate(QPushButton("Descendre"), "down", "ghost")
         up.clicked.connect(lambda: self._move(-1))
         down.clicked.connect(lambda: self._move(1))
         row = QHBoxLayout()
@@ -154,6 +173,7 @@ class CodeGridDialog(QDialog):
                       "Espace, flèches, Début/Fin, Suppr, J, K, L, I, O.")
         hint.setWordWrap(True)
         buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Save | QDialogButtonBox.StandardButton.Cancel)
+        primary(buttons, QDialogButtonBox.StandardButton.Save, "Enregistrer")
         buttons.accepted.connect(self._save)
         buttons.rejected.connect(self.reject)
         lay = QVBoxLayout(self)
@@ -170,11 +190,12 @@ class CodeGridDialog(QDialog):
         self.table.setItem(r, 0, name)
         self.table.setItem(r, 1, QTableWidgetItem(key))
         swatch = QTableWidgetItem(color)
-        swatch.setBackground(QColor(color))
+        swatch.setIcon(theme.dot(color))
         swatch.setFlags(swatch.flags() & ~Qt.ItemFlag.ItemIsEditable)
         self.table.setItem(r, 2, swatch)
         for col, val in ((3, lead), (4, lag)):
-            spin = QDoubleSpinBox(minimum=0, maximum=120, decimals=1, value=val, suffix=" s")
+            spin = theme.style(QDoubleSpinBox(minimum=0, maximum=120, decimals=1, value=val, suffix=" s"),
+                               compact="true")
             self.table.setCellWidget(r, col, spin)
 
     def _item(self, row: int, col: int) -> QTableWidgetItem:
@@ -189,7 +210,7 @@ class CodeGridDialog(QDialog):
         color = QColorDialog.getColor(QColor(item.text()), self, "Couleur du code")
         if color.isValid():
             item.setText(color.name())
-            item.setBackground(color)
+            item.setIcon(theme.dot(color.name()))
 
     def _move(self, delta: int) -> None:
         r = self.table.currentRow()
@@ -258,7 +279,7 @@ class SeekCheckDialog(QDialog):
         self.status.setWordWrap(True)
         self.bar = QProgressBar()
         self.log = QPlainTextEdit(readOnly=True)
-        self.start_btn = QPushButton("Lancer le test")
+        self.start_btn = theme.decorate(QPushButton("Lancer le test"), "target", "primary")
         self.start_btn.clicked.connect(self._generate)
         close = QPushButton("Fermer")
         close.clicked.connect(self.reject)

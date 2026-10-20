@@ -1,13 +1,25 @@
-"""Fenêtre principale : bibliothèque de matchs et espace de travail (P02)."""
+"""Fenêtre principale : navigation latérale, bibliothèque de matchs et espace de travail (P02)."""
 
 from __future__ import annotations
 
 from pathlib import Path
 
+from PySide6.QtCore import QSize, Qt
 from PySide6.QtGui import QAction, QCloseEvent, QDragEnterEvent, QDropEvent, QKeySequence
-from PySide6.QtWidgets import QMainWindow, QMessageBox, QStackedWidget
+from PySide6.QtWidgets import (
+    QButtonGroup,
+    QFrame,
+    QHBoxLayout,
+    QLabel,
+    QMainWindow,
+    QMessageBox,
+    QStackedWidget,
+    QToolButton,
+    QVBoxLayout,
+    QWidget,
+)
 
-from bph_app import __version__
+from bph_app import __version__, theme
 from bph_app.dialogs import CodeGridDialog, SeekCheckDialog
 from bph_app.library import LibraryPage
 from bph_app.store import Store
@@ -23,7 +35,8 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.store = store
         self.setWindowTitle(APP_NAME)
-        self.resize(1400, 880)
+        self.resize(1440, 880)
+        self.setMinimumSize(1100, 680)
         self.setAcceptDrops(True)
 
         self.library = LibraryPage(store, media_dir)
@@ -31,7 +44,14 @@ class MainWindow(QMainWindow):
         self.pages = QStackedWidget()
         self.pages.addWidget(self.library)
         self.pages.addWidget(self.workspace)
-        self.setCentralWidget(self.pages)
+
+        central = QWidget()
+        lay = QHBoxLayout(central)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.setSpacing(0)
+        lay.addWidget(self._build_rail())
+        lay.addWidget(self.pages, 1)
+        self.setCentralWidget(central)
 
         self.library.openRequested.connect(self.open_match)
         self.workspace.backRequested.connect(self.show_library)
@@ -39,6 +59,58 @@ class MainWindow(QMainWindow):
         self._build_menus()
         self.statusBar().showMessage("Traitement intégralement local : aucune vidéo ne quitte cet ordinateur.")
 
+    # --- navigation latérale ------------------------------------------------------------
+    def _rail_button(self, text: str, icon_name: str, tip: str, checkable: bool = False) -> QToolButton:
+        b = QToolButton()
+        b.setText(text)
+        b.setToolTip(tip)
+        b.setIcon(theme.icon(icon_name, theme.MUTED, active_color=theme.ACCENT, size=22))
+        b.setIconSize(QSize(22, 22))
+        b.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextUnderIcon)
+        b.setCheckable(checkable)
+        b.setFixedSize(72, 62)
+        b.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        b.setCursor(Qt.CursorShape.PointingHandCursor)
+        return b
+
+    def _build_rail(self) -> QFrame:
+        rail = theme.named(QFrame(), "rail")
+        rail.setFixedWidth(88)
+        v = QVBoxLayout(rail)
+        v.setContentsMargins(8, 14, 8, 12)
+        v.setSpacing(6)
+        logo = theme.named(QLabel("B"), "logo")
+        logo.setFixedSize(44, 44)
+        logo.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        logo.setToolTip(APP_NAME)
+        v.addWidget(logo, 0, Qt.AlignmentFlag.AlignHCenter)
+        v.addSpacing(14)
+
+        self.nav_library = self._rail_button("Matchs", "library", "Bibliothèque de matchs (Ctrl+B)", True)
+        self.nav_analysis = self._rail_button("Analyse", "film", "Match ouvert", True)
+        self.nav_analysis.setEnabled(False)
+        group = QButtonGroup(self)
+        group.setExclusive(True)
+        for b in (self.nav_library, self.nav_analysis):
+            group.addButton(b)
+            v.addWidget(b, 0, Qt.AlignmentFlag.AlignHCenter)
+        self.nav_library.setChecked(True)
+        self.nav_library.clicked.connect(self.show_library)
+        self.nav_analysis.clicked.connect(lambda: self.pages.setCurrentWidget(self.workspace))
+
+        precision = self._rail_button("Test J1", "target", "Test de précision du lecteur")
+        precision.clicked.connect(lambda: SeekCheckDialog(self).exec())
+        v.addWidget(precision, 0, Qt.AlignmentFlag.AlignHCenter)
+        v.addStretch()
+        keys = self._rail_button("Clavier", "keyboard", "Raccourcis clavier (F1)")
+        keys.clicked.connect(self.show_shortcuts)
+        about = self._rail_button("À propos", "info", f"À propos de {APP_NAME}")
+        about.clicked.connect(self.about)
+        for b in (keys, about):
+            v.addWidget(b, 0, Qt.AlignmentFlag.AlignHCenter)
+        return rail
+
+    # --- menus ---------------------------------------------------------------------------
     def _action(self, menu_name: str, text: str, slot: object, shortcut: KeySpec | None = None) -> QAction:
         menu = self._menus[menu_name]
         act = QAction(text, self)
@@ -73,11 +145,16 @@ class MainWindow(QMainWindow):
             return
         self.workspace.open_match(match)
         self.pages.setCurrentWidget(self.workspace)
+        self.nav_analysis.setEnabled(True)
+        self.nav_analysis.setChecked(True)
+        self.nav_analysis.setToolTip(match.title)
         self.setWindowTitle(f"{match.title} — {APP_NAME}")
         self.workspace.setFocus()
 
     def show_library(self) -> None:
         self.workspace.close_match()
+        self.nav_analysis.setEnabled(False)
+        self.nav_library.setChecked(True)
         self.library.refresh()
         self.pages.setCurrentWidget(self.library)
         self.setWindowTitle(APP_NAME)
@@ -94,11 +171,11 @@ class MainWindow(QMainWindow):
             self.workspace.reload_codes()
 
     def show_shortcuts(self) -> None:
-        rows = "".join(f"<tr><td style='padding:3px 18px 3px 0'><b>{k}</b></td><td>{v}</td></tr>"
-                       for k, v in SHORTCUTS)
+        rows = "".join(f"<tr><td style='padding:4px 22px 4px 0'><b>{k}</b></td>"
+                       f"<td style='color:{theme.MUTED}'>{v}</td></tr>" for k, v in SHORTCUTS)
         box = QMessageBox(self)
         box.setWindowTitle("Raccourcis clavier")
-        box.setText(f"<table>{rows}</table>")
+        box.setText(f"<h3 style='margin:0 0 8px 0'>Tout se fait au clavier</h3><table>{rows}</table>")
         box.exec()
 
     def about(self) -> None:

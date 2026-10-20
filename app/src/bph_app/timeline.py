@@ -12,9 +12,10 @@ from PySide6.QtCore import QPointF, QRectF, Qt, Signal
 from PySide6.QtGui import QColor, QMouseEvent, QPainter, QPaintEvent, QPen, QWheelEvent
 from PySide6.QtWidgets import QSizePolicy, QWidget
 
+from bph_app import theme
 from bph_app.store import timecode
 
-RULER_H = 22
+RULER_H = 24
 STEPS_SECONDS = (1, 2, 5, 10, 15, 30, 60, 120, 300, 600, 900, 1800)
 
 
@@ -32,7 +33,7 @@ class Timeline(QWidget):
 
     def __init__(self, parent: QWidget | None = None) -> None:
         super().__init__(parent)
-        self.setMinimumHeight(64)
+        self.setMinimumHeight(80)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         self.setMouseTracking(True)
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
@@ -111,54 +112,68 @@ class Timeline(QWidget):
     # --- dessin --------------------------------------------------------------------
     def paintEvent(self, _e: QPaintEvent) -> None:
         p = QPainter(self)
-        p.setRenderHint(QPainter.RenderHint.Antialiasing, False)
+        p.setRenderHint(QPainter.RenderHint.Antialiasing)
         w, h = self.width(), self.height()
-        pal = self.palette()
-        p.fillRect(0, 0, w, h, pal.base())
-        p.fillRect(0, 0, w, RULER_H, pal.alternateBase())
+        muted, border = QColor(theme.MUTED), QColor(theme.BORDER)
+
+        # piste des tags : fond arrondi discret
+        lane = QRectF(0, RULER_H + 4, w, h - RULER_H - 8)
+        p.setPen(Qt.PenStyle.NoPen)
+        p.setBrush(QColor(theme.SUBTLE))
+        p.drawRoundedRect(lane, 8, 8)
 
         # graduations : pas choisi pour garder ~90 px entre deux libellés
         seconds_visible = self.view_len / self.fps
         step = next((s for s in STEPS_SECONDS if s / seconds_visible * w >= 90), STEPS_SECONDS[-1])
         step_frames = step * self.fps
         first = int(self.view_start // step_frames) * step_frames
-        p.setPen(pal.text().color())
         font = p.font()
-        font.setPointSizeF(max(7.0, font.pointSizeF() - 1))
+        font.setPointSizeF(max(7.0, font.pointSizeF() - 1.5))
         p.setFont(font)
         f = first
         while f <= self.view_start + self.view_len:
             x = self.x_of(f)
             if x >= 0:   # un libellé à moitié hors champ serait illisible
-                p.drawLine(QPointF(x, RULER_H - 6), QPointF(x, RULER_H))
-                p.drawText(QPointF(x + 3, RULER_H - 8), timecode(int(f), self.fps)[:8])
+                p.setPen(QPen(border, 1))
+                p.drawLine(QPointF(x, RULER_H - 5), QPointF(x, RULER_H))
+                p.setPen(muted)
+                p.drawText(QPointF(x + 4, RULER_H - 7), timecode(int(f), self.fps)[:8])
             f += step_frames
         # images individuelles visibles quand le zoom est fort
         if w / self.view_len >= 6:
-            p.setPen(QPen(pal.mid().color()))
+            p.setPen(QPen(border, 1))
             for fr in range(int(self.view_start), int(self.view_start + self.view_len) + 1):
                 x = self.x_of(fr)
-                p.drawLine(QPointF(x, RULER_H - 3), QPointF(x, RULER_H))
+                p.drawLine(QPointF(x, RULER_H - 2), QPointF(x, RULER_H))
 
         # plages des tags
-        lane_top, lane_h = RULER_H + 6, h - RULER_H - 12
+        inner = lane.adjusted(0, 6, 0, -6)
         for m in self.markers:
             x0, x1 = self.x_of(m.frame_in), self.x_of(m.frame_out + 1)
             if x1 < 0 or x0 > w:
                 continue
+            rect = QRectF(x0, inner.top(), max(4.0, x1 - x0), inner.height())
             c = QColor(m.color)
-            c.setAlpha(110 if not m.selected else 200)
-            p.fillRect(QRectF(x0, lane_top, max(2.0, x1 - x0), lane_h), c)
-            p.fillRect(QRectF(self.x_of(m.frame) - 1, lane_top, 2, lane_h), QColor(m.color))
-            if m.selected:
-                p.setPen(QPen(pal.text().color(), 1))
-                p.drawRect(QRectF(x0, lane_top, max(2.0, x1 - x0), lane_h))
+            c.setAlpha(200 if m.selected else 95)
+            p.setPen(QPen(QColor(m.color), 1.5) if m.selected else Qt.PenStyle.NoPen)
+            p.setBrush(c)
+            p.drawRoundedRect(rect, 5, 5)
+            p.setPen(Qt.PenStyle.NoPen)
+            p.setBrush(QColor(m.color))
+            p.drawRoundedRect(QRectF(self.x_of(m.frame) - 1.5, inner.top(), 3, inner.height()), 1.5, 1.5)
 
-        # survol et tête de lecture
+        # survol
         if self._hover is not None:
-            p.setPen(QPen(pal.mid().color(), 1, Qt.PenStyle.DashLine))
             x = self.x_of(self._hover)
+            p.setPen(QPen(QColor(theme.BORDER_STRONG), 1, Qt.PenStyle.DashLine))
             p.drawLine(QPointF(x, RULER_H), QPointF(x, h))
+
+        # tête de lecture : trait et poignée ronde
         x = self.x_of(self.frame)
-        p.fillRect(QRectF(x - 1, 0, 2, h), pal.highlight())
+        accent = QColor(theme.ACCENT)
+        p.setPen(QPen(accent, 2))
+        p.drawLine(QPointF(x, RULER_H - 2), QPointF(x, h))
+        p.setPen(QPen(QColor("#ffffff"), 2))
+        p.setBrush(accent)
+        p.drawEllipse(QPointF(x, RULER_H - 3), 6, 6)
         p.end()
