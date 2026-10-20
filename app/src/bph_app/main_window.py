@@ -11,7 +11,7 @@ from bph_app import __version__
 from bph_app.dialogs import CodeGridDialog, SeekCheckDialog
 from bph_app.library import LibraryPage
 from bph_app.store import Store
-from bph_app.workspace import WorkspacePage
+from bph_app.workspace import SHORTCUTS, WorkspacePage
 from bph_engine.video import SUPPORTED_EXTENSIONS
 
 APP_NAME = "Bottola Analyse"
@@ -94,12 +94,11 @@ class MainWindow(QMainWindow):
             self.workspace.reload_codes()
 
     def show_shortcuts(self) -> None:
-        from bph_app import workspace
-
-        doc = (workspace.__doc__ or "").split("Clavier (aucune souris nécessaire) :", 1)[-1]
+        rows = "".join(f"<tr><td style='padding:3px 18px 3px 0'><b>{k}</b></td><td>{v}</td></tr>"
+                       for k, v in SHORTCUTS)
         box = QMessageBox(self)
         box.setWindowTitle("Raccourcis clavier")
-        box.setText("<pre>" + doc.strip("\n") + "</pre>")
+        box.setText(f"<table>{rows}</table>")
         box.exec()
 
     def about(self) -> None:

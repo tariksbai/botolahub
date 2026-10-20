@@ -129,8 +129,9 @@ class Timeline(QWidget):
         f = first
         while f <= self.view_start + self.view_len:
             x = self.x_of(f)
-            p.drawLine(QPointF(x, RULER_H - 6), QPointF(x, RULER_H))
-            p.drawText(QPointF(x + 3, RULER_H - 8), timecode(int(f), self.fps)[:8])
+            if x >= 0:   # un libellé à moitié hors champ serait illisible
+                p.drawLine(QPointF(x, RULER_H - 6), QPointF(x, RULER_H))
+                p.drawText(QPointF(x + 3, RULER_H - 8), timecode(int(f), self.fps)[:8])
             f += step_frames
         # images individuelles visibles quand le zoom est fort
         if w / self.view_len >= 6:

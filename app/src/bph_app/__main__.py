@@ -6,7 +6,7 @@ import os
 import sys
 from pathlib import Path
 
-from PySide6.QtCore import QStandardPaths, Qt
+from PySide6.QtCore import QLibraryInfo, QLocale, QStandardPaths, Qt, QTranslator
 from PySide6.QtGui import QColor, QPalette
 from PySide6.QtWidgets import QApplication
 
@@ -34,7 +34,20 @@ def light_palette() -> QPalette:
     }
     for role, value in colors.items():
         p.setColor(role, QColor(value))
+    # état désactivé lisible : sans cela, un bouton inactif ressemble à un bouton actif
+    disabled = QPalette.ColorGroup.Disabled
+    for role in (QPalette.ColorRole.ButtonText, QPalette.ColorRole.Text, QPalette.ColorRole.WindowText):
+        p.setColor(disabled, role, QColor("#a0a8b0"))
+    p.setColor(disabled, QPalette.ColorRole.Button, QColor("#eef1f4"))
     return p
+
+
+def install_french(app: QApplication) -> None:
+    """Boutons standard de Qt en français (Enregistrer, Annuler…)."""
+    path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
+    translator = QTranslator(app)
+    if translator.load(QLocale(QLocale.Language.French), "qtbase", "_", path):
+        app.installTranslator(translator)
 
 
 def data_dir() -> Path:
@@ -50,6 +63,7 @@ def main() -> int:
     app.setApplicationName(APP_NAME)
     app.setOrganizationName("Bottola Performance Hub")
     app.setStyle("Fusion")
+    install_french(app)
     app.setPalette(light_palette())
     root = data_dir()
     store = Store(root / "bibliotheque.sqlite")

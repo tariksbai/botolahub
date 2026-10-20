@@ -1,13 +1,6 @@
 """Espace de travail d'un match : lecteur, timeline, grille de codes et tags (P04, P06).
 
-Clavier (aucune souris nécessaire) :
-    Espace          lecture / pause          K             pause
-    ← / →           image précédente/suivante L            lecture, puis ×2, ×4
-    Maj + ← / →     ± 1 seconde              J             recul de 5 secondes
-    Ctrl + ← / →    ± 10 secondes            Début / Fin   début / fin du match
-    I / O           début / fin du tag sélectionné à la position courante
-    Suppr           supprimer le tag sélectionné
-    touches de la grille : créer un tag à l'image courante
+Tout se fait au clavier, sans souris : voir SHORTCUTS.
 """
 
 from __future__ import annotations
@@ -36,6 +29,19 @@ from bph_app.store import Code, Match, Store, Tag, timecode
 from bph_app.timeline import Marker, Timeline
 
 RATES = (0.25, 0.5, 1.0, 1.5, 2.0, 4.0)
+SHORTCUTS = [
+    ("Espace", "lecture / pause"),
+    ("← / →", "image précédente / suivante"),
+    ("Maj + ← / →", "± 1 seconde"),
+    ("Ctrl + ← / →", "± 10 secondes"),
+    ("J / K / L", "recul de 5 s / pause / lecture puis ×2, ×4"),
+    ("Début / Fin", "début / fin du match"),
+    ("Touches de la grille", "créer un tag à l'image courante"),
+    ("I / O", "début / fin du tag sélectionné à la position courante"),
+    ("Suppr", "supprimer le tag sélectionné"),
+    ("Ctrl + molette", "zoom de la timeline, jusqu'à l'image près"),
+    ("Ctrl + 0", "timeline entière"),
+]
 KeySpec = str | QKeySequence | QKeySequence.StandardKey
 
 
